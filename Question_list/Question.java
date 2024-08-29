@@ -1,7 +1,8 @@
 /*
  Q.01   26. Remove Duplicates from Sorted Array
 
-Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once.
+ The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 
 Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
 
@@ -27,7 +28,8 @@ Return k.
 
 Q.02 - 27. Remove Element
 
-Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place.
+ The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
 
 Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
 
@@ -253,7 +255,8 @@ boxes++;
 
 Q.09
 2656. Maximum Sum With Exactly K Elements 
-You are given a 0-indexed integer array nums and an integer k. Your task is to perform the following operation exactly k times in order to maximize your score:
+You are given a 0-indexed integer array nums and an integer k.
+ Your task is to perform the following operation exactly k times in order to maximize your score:
 Select an element m from nums.
 Remove the selected element m from the array.
 Add a new element with a value of m + 1 to the array.
@@ -293,7 +296,7 @@ Note that there may be multiple seats or students in the same position at the be
 
 Approach
  sort both array.
- substract both array eachother and add this value with sum+=seats[i]+students[i];
+ substract both array eachother and add this value with sum+=seats[i]-students[i];
  return sum.
 
  Q.12 
@@ -336,4 +339,214 @@ Approach
 3. Give another condition also suppose p counted two zero in the last so give if condition if(p==2 && arr.size()-1==i) so
 n--;
 4. p starting initailize with zero because the first start with zero
+
+
+Q.14 
+2149. Rearrange Array Elements by Sign
+You are given a 0-indexed integer array nums of even length consisting of an equal number of positive and negative integers.
+You should return the array of nums such that the the array follows the given conditions:
+Every consecutive pair of integers have opposite signs.
+For all integers with the same sign, the order in which they were present in nums is preserved.
+The rearranged array begins with a positive integer.
+Return the modified array after rearranging the elements to satisfy the aforementioned conditions.
+
+Example 1:
+Input: nums = [3,1,-2,-5,2,-4]
+Output: [3,-2,1,-5,2,-4]
+
+Approach
+Define i=0,j=1
+positive integer come so i+=2 else j+=2.
+and v[i]=nums[k]; same as v[j]=nums[k];
+
+
+Q.15
+3075. Maximize Happiness of Selected Children
+You are given an array happiness of length n, and a positive integer k.
+There are n children standing in a queue, where the ith child has happiness value happiness[i]. You want to select k children from these n children in k turns.
+In each turn, when you select a child, the happiness value of all the children that have not been selected till now decreases by 1. Note that the happiness value cannot become negative and gets decremented only if it is positive.
+Return the maximum sum of the happiness values of the selected children you can achieve by selecting k children.
+Example 1:
+Input: happiness = [1,2,3], k = 2
+Output: 4
+
+Approach
+1. sort the array
+2. define value variable to store the happiness value value=arr[i]-count.
+3. our value is greater than 0 so add with sum variable sum+=value;
+3. every iteration count will be increase.
+4. suppose count is greater than or equal k so break the iteration.
+
+
+
+Q.16 
+2789. Largest Element in an Array after Merge Operations
+
+You are given a 0-indexed array nums consisting of positive integers.
+
+You can do the following operation on the array any number of times:
+
+Choose an integer i such that 0 <= i < nums.length - 1 and nums[i] <= nums[i + 1]. Replace the element nums[i + 1] with nums[i] + nums[i + 1] and delete the element nums[i] from the array.
+Return the value of the largest element that you can possibly obtain in the final array.
+
+ 
+
+Example 1:
+
+Input: nums = [2,3,7,9,3]
+Output: 21
+
+1. push in another vector type of long long .
+2. iteration with end of the array and check arr[i]<=arr[i+1] it true so arr[i]=arr[i]+arr[i+1];
+3. return arr[0];
+
+
+Q.17 
+2870. Minimum Number of Operations to Make Array Empty
+
+You are given a 0-indexed array nums consisting of positive integers.
+
+There are two types of operations that you can apply on the array any number of times:
+
+Choose two elements with equal values and delete them from the array.
+Choose three elements with equal values and delete them from the array.
+Return the minimum number of operations required to make the array empty, or -1 if it is not possible.
+
+ 
+
+Example 1:
+
+Input: nums = [2,3,3,2,2,4,2,3,4]
+Output: 4
+
+Approach
+
+1. sort the array
+2. Run for loop
+3. in if condition count the frequency with same element.
+4. check in else condition ans+=cnt/3; and if(cnt%3!=0) ans++;
+5. suppose cnt is 1 so return -1;
+
+
+
+Q.18 
+1833. Maximum Ice Cream Bars
+It is a sweltering summer day, and a boy wants to buy some ice cream bars.
+At the store, there are n ice cream bars. You are given an array costs of length n, where costs[i] is the price of the ith ice cream bar in coins. The boy initially has coins coins to spend, and he wants to buy as many ice cream bars as possible. 
+
+Note: The boy can buy the ice cream bars in any order.
+
+Return the maximum number of ice cream bars the boy can buy with coins coins.
+
+You must solve the problem by counting sort.
+
+Example 1:
+Input: costs = [1,3,2,4,1], coins = 7
+Output: 4
+
+Approach
+1. sort the array.
+2. give if conditon coins is greater than costs[i].
+3. every time decrease the coins by costs
+4. and increase the ans++
+
+
+Q.19 
+2824. Count Pairs Whose Sum is Less than Target
+
+Given a 0-indexed integer array nums of length n and an integer target,
+ return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
+ 
+
+Example 1:
+
+Input: nums = [-1,1,2,3,1], target = 2
+Output: 3
+
+
+Q.20 
+2460. Apply Operations to an Array
+Solved
+Easy
+Topics
+Companies
+Hint
+You are given a 0-indexed array nums of size n consisting of non-negative integers.
+
+You need to apply n - 1 operations to this array where, in the ith operation (0-indexed), you will apply the following on the ith element of nums:
+
+If nums[i] == nums[i + 1], then multiply nums[i] by 2 and set nums[i + 1] to 0. Otherwise, you skip this operation.
+After performing all the operations, shift all the 0's to the end of the array.
+
+For example, the array [1,0,2,0,0,1] after shifting all its 0's to the end, is [1,2,1,0,0,0].
+Return the resulting array.
+
+Note that the operations are applied sequentially, not all at once.
+Example 1:
+Input: nums = [1,2,2,1,1,0]
+Output: [1,4,2,0,0,0]
+
+
+Q.21 
+ Move Zeroes To End
+Moderate
+80/80
+Average time to solve is 30m
+Contributed by
+169 upvotes
+Asked in companies
+Problem statement
+Given an unsorted array of integers, you have to move the array elements in a way such that all the zeroes are transferred to the end, and all the non-zero elements are moved to the front. The non-zero elements must be ordered in their order of appearance.
+
+For example, if the input array is: [0, 1, -2, 3, 4, 0, 5, -27, 9, 0], then the output array must be:
+
+[1, -2, 3, 4, 5, -27, 9, 0, 0, 0].
+
+Expected Complexity: Try doing it in O(n) time complexity and O(1) space complexity. Here, ‘n’ is the size of the array.
+
+Detailed explanation ( Input/output format, Notes, Images )
+Sample Input 1:
+2
+7
+2 0 4 1 3 0 28
+5
+0 0 0 0 1
+Sample Output 1:
+2 4 1 3 28 0 0
+1 0 0 0 0
+
+Approach
+int j=0;
+check the element is not equal to zeros so put on the j position and j increase
+if(i!=j) arr[i]=0;
+
+Q.22
+ vector<int> sortByFreq(vector<int>& arr) {
+        // Your code here
+        map<int ,int>mpp;
+        for(int i=0;i<arr.size();i++){
+            mpp[arr[i]]++;
+        }
+          vector<pair<int, int>> v;
+        for (auto it : mpp) {
+            v.push_back({it.second, it.first});  // {frequency, element}
+        }
+        
+         sort(v.begin(), v.end(), [&](pair<int, int>& a, pair<int, int>& b) {
+            if (a.first == b.first) {
+                return a.second < b.second;
+            }
+            return a.first > b.first;
+        });
+        
+        vector<int> ans;
+        for (auto x : v) {
+            int f = x.first, el = x.second;
+            for (int i = 0; i < f; i++) {
+                ans.push_back(el);
+            }
+        }
+        return ans;
+        
+    }
 */
