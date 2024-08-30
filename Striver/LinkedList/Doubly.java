@@ -36,6 +36,36 @@ public class Doubly {
         return head; // Return the head of the linked list
     }
 
+
+
+    // Delete The head of the linked list .
+  
+ public static Node  deleteHead(Node head){
+        if( head.next==null || head==null){
+            return null;
+        }
+      
+       Node prev=head;
+        head=head.next;
+        head.back=null;
+    
+        prev.next=null;
+       
+        return head;
+    }
+  public static  Node deletetail(Node head){
+        if(head==null || head.next==null) return null;
+        Node tail=head;
+        while(tail.next!=null){
+            tail=tail.next;
+    
+        }
+        Node prev=tail.back;
+        prev.next=null;
+        tail.back=null;
+     
+        return head;
+    }
     public static void print(Node head) {
         while (head != null) {
             System.out.print(head.data + " ");
@@ -43,11 +73,17 @@ public class Doubly {
         }
         System.out.println();
     }
+    public static void 
+
 
     public static void  main(String[] args) {
         List<Integer> arr = Arrays.asList(3, 1, 4, 5);
         Node head = convertArrToLL(arr);
+        head=deleteHead(head);
         print(head);
+        head=deletetail(head);
+        print(head);
+
         System.out.println("Hello");
     }
 }

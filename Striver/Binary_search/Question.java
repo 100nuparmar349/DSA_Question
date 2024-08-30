@@ -155,4 +155,104 @@ Approach
 3. so check how many are missing simple to write formula if(arr[mid]-mid+1<k) low=mid+1.
 else high=mid;
 
+
+Q.07
+540. Single Element in a Sorted Array
+
+You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
+
+Return the single element that appears only once.
+
+Your solution must run in O(log n) time and O(1) space.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,2,3,3,4,4,8,8]
+Output: 2
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int low=1,n=nums.size(), high=n-2;
+             if (n==1) return nums[0];
+        if(nums[0]!=nums[1]) return nums[0];
+        if(nums[n-1]!=nums[n-2]) return nums[n-1];
+
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(nums[mid]!=nums[mid-1] && nums[mid]!=nums[mid+1]) return nums[mid];
+            if(mid%2==1 && nums[mid]==nums[mid-1]  || mid%2==0 && nums[mid]==nums[mid+1]  ){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+};
+
+
+Q.08
+
+374. Guess Number Higher or Lower
+
+We are playing the Guess Game. The game is as follows:
+
+I pick a number from 1 to n. You have to guess which number I picked.
+
+Every time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.
+
+You call a pre-defined API int guess(int num), which returns three possible results:
+
+-1: Your guess is higher than the number I picked (i.e. num > pick).
+1: Your guess is lower than the number I picked (i.e. num < pick).
+0: your guess is equal to the number I picked (i.e. num == pick).
+Return the number that I picked.
+
+ 
+
+Example 1:
+
+Input: n = 10, pick = 6
+Output: 6
+
+
+ * Forward declaration of guess API.
+ * @param  num   your guess
+ * @return 	     -1 if num is higher than the picked number
+ *			      1 if num is lower than the picked number
+ *               otherwise return 0
+ * int guess(int num);
+
+
+ class Solution {
+    public:
+        int guessNumber(int n) {
+             int start = 1;
+            int end = n;
+           
+            int answer = 0;
+            while(start <= end)
+            {
+               int mid = start + (end - start) / 2;
+                if(guess(mid) == -1)
+                {
+                    end = mid - 1;
+                }
+                else if(guess(mid) == 1)
+                {
+                    start = mid + 1;
+                }
+                else if(guess(mid) == 0)
+                {
+                    answer = mid;
+                    break;
+                }
+    
+            }
+            return answer;
+            
+        }
+    };
  */
