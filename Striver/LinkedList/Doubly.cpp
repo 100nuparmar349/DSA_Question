@@ -144,7 +144,9 @@ Node* insertbefortail(Node* head,int val){
     Node* newNode=new Node(val,tail,prev);
     prev->next=newNode;
     tail->back=newNode;
-    return newNode;
+    Node* x=newNode->next;
+    cout<<x->data<<" New Node :- ";
+    return head;
 
 
 }
@@ -223,6 +225,13 @@ int main(){
     print(head);
     cout<<endl;
 
+
+    // Insert Before tail.
+    head=insertbefortail(head,15);
+    print(head);
+    cout<<endl;
+
+
     head=InsertKth_Element(head,4,2);
     print(head);
     cout<<endl;
@@ -288,6 +297,8 @@ class Solution {
 };
 
 
+
+
 Doubly linked list Insertion at given position
 Difficulty: BasicAccuracy: 47.13%Submissions: 108K+Points: 1
 Given a doubly-linked list, a position p, and an integer x. The task is to add a new node with value x at the position just after pth node in the doubly linked list.
@@ -320,8 +331,39 @@ void addNode(Node *head, int pos, int data)
    temp->next=newNode;
    
 
+Reverse a Doubly Linked List
+Difficulty: EasyAccuracy: 70.38%Submissions: 134K+Points: 2
+Given a doubly linked list. Your task is to reverse the doubly linked list and return its head.
 
-     // Optimal Approach
+Examples:
+
+Input: LinkedList: 3 <-> 4 <-> 5
+Output: 5 <-> 4 <-> 3
+
+class Solution {
+  public:
+    // Function to reverse a doubly linked list
+    DLLNode* reverseDLL(DLLNode* head) {
+        // Your code here
+      
+      // Brute Force.
+      
+        // stack<int>st;
+        
+        // DLLNode* temp=head;
+        // while(temp!=NULL){
+        //     st.push(temp->data);
+        //     temp=temp->next;
+        // }
+        // temp=head;
+        // while(temp!=NULL){
+        //     temp->data=st.top();
+        //     st.pop();
+        //     temp=temp->next;
+        // }
+        // return head;
+        
+        // Optimal Approach
         if(head==NULL || head->next==NULL)return head;
         
         DLLNode* curr=head;
@@ -336,6 +378,12 @@ void addNode(Node *head, int pos, int data)
         return head;
         
         
+    }
+};
+
+
+
+    
    
 }
 */

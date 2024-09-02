@@ -10,4 +10,7 @@ The given array is sorted in non-decreasing order.
 
 Approach 
 Apply Binary search if it's present in the array so return 1 otherwise return 0.
+
+
  */
+

@@ -1,5 +1,5 @@
 /*
-Q.01
+# Q.01
  704. Binary Search
 
 Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
@@ -14,9 +14,9 @@ Approach
 1.Intialize the two variable start=0 , end =n-1;
 2. if(target>nums[mid]) low=mid+1, else high=mid-1.
 
-Q.02 
+# Q.02 
 Given a sorted array arr[] of size n without duplicates, and given a value x.
- Floor of x is defined as the largest element k in arr[] such that k is smaller than or equal to x. 
+ Floor of x is defined as the largest element k in arr[] such that k is smaller than or e# Qual to x. 
  Find the index of k(0-based indexing).
 
 Examples
@@ -44,9 +44,9 @@ Output: -1
     }
 
 Approach
-1. mid is less than or equal to k so ans will be intialize
+1. mid is less than or e# Qual to k so ans will be intialize
 
-Q.03
+# Q.03
 
 35. Search Insert Position
 
@@ -64,13 +64,13 @@ Output: 2
 1. check nums[mid]<target high=mid-1. else ans=mid, low=mid+1.
 
 
-Q.04 
+# Q.04 
 Problem statement
 You're given a sorted array 'a' of 'n' integers and an integer 'x'.
 Find the floor and ceiling of 'x' in 'a[0..n-1]'.
 Note:
-Floor of 'x' is the largest element in the array which is smaller than or equal to 'x'.
-Ceiling of 'x' is the smallest element in the array greater than or equal to 'x'.
+Floor of 'x' is the largest element in the array which is smaller than or e# Qual to 'x'.
+Ceiling of 'x' is the smallest element in the array greater than or e# Qual to 'x'.
 Example:
 Input: 
 n=6, x=5, a=[3, 4, 7, 8, 8, 10]   
@@ -90,7 +90,7 @@ Sample Output 1 :
 1. check if(arr[mid]>x) ceil=arr[mid] high=mid-1;
 else floor=arr[mid] low=mid+1;
 
-Q.05 
+# Q.05 
 
 34. Find First and Last Position of Element in Sorted Array.
 Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
@@ -141,7 +141,7 @@ class Solution {
 }
 
 
-Q.06 
+# Q.06 
 1539. Kth Missing Positive Number
 Given an array arr of positive integers sorted in a strictly increasing order, and an integer k.
 Return the kth positive integer that is missing from this array.
@@ -151,12 +151,12 @@ Output: 9
 
 Approach
 1. Define low=0, high=arr.size();
-2. we play with the index in this question.
+2. we play with the index in this # Question.
 3. so check how many are missing simple to write formula if(arr[mid]-mid+1<k) low=mid+1.
 else high=mid;
 
 
-Q.07
+# Q.07
 540. Single Element in a Sorted Array
 
 You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
@@ -193,7 +193,7 @@ public:
 };
 
 
-Q.08
+# # Q.08
 
 374. Guess Number Higher or Lower
 
@@ -207,7 +207,7 @@ You call a pre-defined API int guess(int num), which returns three possible resu
 
 -1: Your guess is higher than the number I picked (i.e. num > pick).
 1: Your guess is lower than the number I picked (i.e. num < pick).
-0: your guess is equal to the number I picked (i.e. num == pick).
+0: your guess is e# Qual to the number I picked (i.e. num == pick).
 Return the number that I picked.
 
  
@@ -256,3 +256,64 @@ Output: 6
         }
     };
  */
+
+
+# Q.09 Allocate Minimum Pages
+You have n books, each with arr[i] a number of pages. m students need to be allocated contiguous books, with each student getting at least one book.
+Out of all the permutations, the goal is to find the permutation where the sum of the maximum number of pages in a book allotted to a student should be the minimum, out of all possible permutations.
+
+Note: Return -1 if a valid assignment is not possible, and allotment should be in contiguous order (see the explanation for better understanding).
+
+Input: n = 4, arr[] = [12, 34, 67, 90], m = 2
+Output: 113
+
+
+
+import java.util.*;
+
+public class Main {
+    public static int countStudents(ArrayList<Integer> arr, int pages) {
+        int n = arr.size(); // size of array
+        int students = 1;
+        long pagesStudent = 0;
+        for (int i = 0; i < n; i++) {
+            if (pagesStudent + arr.get(i) <= pages) {
+                // add pages to current student
+                pagesStudent += arr.get(i);
+            } else {
+                // add pages to next student
+                students++;
+                pagesStudent = arr.get(i);
+            }
+        }
+        return students;
+    }
+
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        // book allocation impossible
+        if (m > n)
+            return -1;
+
+        int low = Collections.max(arr);
+        int high = arr.stream().mapToInt(Integer::intValue).sum();
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int students = countStudents(arr, mid);
+            if (students > m) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(25, 46, 28, 49, 24));
+        int n = 5;
+        int m = 4;
+        int ans = findPages(arr, n, m);
+        System.out.println("The answer is: " + ans);
+    }
+}
+
