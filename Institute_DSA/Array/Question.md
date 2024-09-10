@@ -489,13 +489,7 @@ Output: [1,4,2,0,0,0]
 
 Q.21 
  Move Zeroes To End
-Moderate
-80/80
-Average time to solve is 30m
-Contributed by
-169 upvotes
-Asked in companies
-Problem statement
+
 Given an unsorted array of integers, you have to move the array elements in a way such that all the zeroes are transferred to the end, and all the non-zero elements are moved to the front. The non-zero elements must be ordered in their order of appearance.
 
 For example, if the input array is: [0, 1, -2, 3, 4, 0, 5, -27, 9, 0], then the output array must be:
@@ -549,4 +543,108 @@ Q.22
         return ans;
         
     }
+
+# 23
+
+16. 3Sum Closest
+Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
+Return the sum of the three integers.
+You may assume that each input would have exactly one solution.
+Example 1:
+Input: nums = [-1,2,1,-4], target = 1
+Output: 2
+Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+      Arrays.sort(nums);
+      int closet=Integer.MAX_VALUE;
+      for(int i=0;i<nums.length-2;i++){
+        int j=i+1;
+        int k=nums.length-1;
+       while(j<k){
+        int current_sum=nums[i]+nums[j]+nums[k];
+        if(Math.abs(current_sum-target)<Math.abs(closet-target)){
+            closet=current_sum;
+        }
+        if(current_sum<target){
+            j++;
+
+            
+        }else if(current_sum>target){
+            k--;
+        }else{
+            return current_sum;
+        }
+       }
+      }
+      return closet;
+    }
+}
+
+# 24 
+1122. Relative Sort Array
+Given two arrays arr1 and arr2, the elements of arr2 are distinct, and all elements in arr2 are also in arr1.
+
+Sort the elements of arr1 such that the relative ordering of items in arr1 are the same as in arr2. Elements that do not appear in arr2 should be placed at the end of arr1 in ascending order.
+Example 1:
+Input: arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]
+Output: [2,2,2,1,4,3,3,9,6,7,19]
+
+Approach
+ 
+ First array will be sorted according to the second array .
+ Or remaining element sorted according to the sorting element.
+ public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        int index=0;
+        for(int j:arr2){
+            for(int i=0;i<arr1.length;i++){
+                if(j==arr1[i]){
+                    int temp=arr1[index];
+                    arr1[index]=arr1[i];
+                    arr1[i]=temp;
+                    index++;
+
+                }
+            }
+        }
+        for(int i=index;i<arr1.length;i++){
+            for(int j=index;j<arr1.length-1;j++){
+                if(arr1[j]>arr1[j+1]){
+                    int temp=arr1[j];
+                    arr1[j]=arr1[j+1];
+                    arr1[j+1]=temp;
+                }
+            }
+
+        }
+        return arr1;
+        
+    }
+
+# 25 
+
+Third Largest.
+
+class Solution {
+    int thirdLargest(int arr[]) {
+        // Your code here
+        int largest=Integer.MIN_VALUE;
+        int second=Integer.MIN_VALUE;
+        int third=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+           if(arr[i]>largest){
+               third=second;
+               second=largest;
+               largest=arr[i];
+           }else if(arr[i]>=second && arr[i]<=largest){
+               third=second;
+               second=arr[i];
+           }else if(arr[i]>=third && arr[i]<=second){
+               third=arr[i];
+           }
+        }
+        return third;
+    }
+}
+
 */

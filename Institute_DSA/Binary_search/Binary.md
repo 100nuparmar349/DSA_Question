@@ -59,4 +59,66 @@ public class Main {
 }
 
 
+# Q.02  658. Find K Closest Elements
+Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. The result should also be sorted in ascending order.
+
+An integer a is closer to x than an integer b if:
+
+|a - x| < |b - x|, or
+|a - x| == |b - x| and a < b
+ 
+
+Example 1:
+
+Input: arr = [1,2,3,4,5], k = 4, x = 3
+Output: [1,2,3,4]
+
+class Solution {
+public:
+int findmid(vector<int>arr,int x){
+     int low=0,high=arr.size()-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(arr[mid]==x){
+                return mid;
+            } else if(arr[mid]<x){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return high;
+
+}
+
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        int index = findmid(arr, x);
+        int left = index, right = index + 1;
+        vector<int> result;
+        while (k > 0) {
+            if (left >= 0 && right < arr.size()) {
+                if (abs(arr[left] - x) <= abs(arr[right] - x)) {
+                    result.push_back(arr[left]);
+                    left--;
+                } else {
+                    result.push_back(arr[right]);
+                    right++;
+                }
+            } else if (left >= 0) {
+                result.push_back(arr[left]);
+                left--;
+            } else if (right < arr.size()) {
+                result.push_back(arr[right]);
+                right++;
+            }
+            k--;
+        }
+        sort(result.begin(),result.end());
+        return result;
+       
+        
+    }
+};
+
+
 

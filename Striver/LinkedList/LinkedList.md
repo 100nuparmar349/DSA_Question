@@ -650,3 +650,469 @@ class Solution {
         return merge(left, right); // Merge the sorted halves
     }
 }
+
+
+# Q.11  Sort linked list of 0s 1s 2s
+
+Given a linked list of 'N' nodes, where each node has an integer value that can be 0, 1, or 2. You need to sort the linked list in non-decreasing order and the return the head of the sorted list.
+
+
+
+Example:
+Given linked list is 1 -> 0 -> 2 -> 1 -> 2. 
+The sorted list for the given linked list will be 0 -> 1 -> 1 -> 2 -> 2.
+
+
+Detailed explanation ( Input/output format, Notes, Images )
+Sample Input 1:
+7
+1 0 2 1 0 2 1
+
+
+Sample Output 1:
+0 0 1 1 1 2 2
+
+public class Solution
+{
+    public static Node sortList(Node head) {
+        // Write your code here
+        Node zero_head=new Node(-1);
+        Node one_head=new Node(-1);
+        Node two_head=new Node(-1);
+
+        Node zero=zero_head;
+        Node one=one_head;
+        Node two=two_head;
+
+        Node temp=head;
+        while(temp!=null){
+            if(temp.data==0){
+                zero.next=temp;
+                zero=temp;
+
+            }else if(temp.data==1){
+                one.next=temp;
+                one=temp;
+
+
+            }else{
+                two.next=temp;
+                two=temp;
+            }
+            temp=temp.next;
+        }
+        zero.next=(one_head.next!=null)?one_head.next:two_head.next;
+        one.next=two_head.next;
+        two.next=null;
+        return zero_head.next;
+    }
+}
+
+
+# Q.12
+160. Intersection of Two Linked Lists
+
+Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+Output: Intersected at '8'
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        map<ListNode* ,int>mpp;
+        ListNode* temp=headA;
+        while(temp!=NULL){
+            mpp[temp]++;
+            temp=temp->next;
+
+
+        }
+        ListNode* temp1=headB;
+
+        while(temp1!=NULL){
+            if(mpp.find(temp1)!=mpp.end()){
+                return temp1;
+            }
+            temp1=temp1->next;
+            
+        }
+        return NULL;
+
+        
+    }
+};
+
+# Q.13 Add 1 to a Linked List Number
+Difficulty: MediumAccuracy: 31.91%Submissions: 247K+Points: 4
+You are given a linked list where each element in the list is a node and have an integer data. You need to add 1 to the number formed by concatinating all the list node numbers together and return the head of the modified linked list. 
+
+Note: The head represents the first element of the given array.
+
+
+
+Approach
+with help of recursion we easily to solve this problem because at the end we add 1 .
+
+class Solution {
+    public int helper(Node temp){
+
+#  Base Condition.
+
+       if(temp==null){
+           return 1;
+       }
+# One By one come after base condition are hit.
+
+      int carry=helper(temp.next);
+      
+      temp.data=temp.data+carry;
+      if(temp.data<10)return 0;
+    temp.data=0;
+    return 1;
+    
+    
+    //   int sum=temp.data+carry;
+    //   temp.data=sum%10;
+    //     return sum/10;
+    }
+    public Node addOne(Node head) {
+        
+    
+      int carry = helper(head);
+
+      // if there carry are exist so this if condition are run.
+      
+        if (carry == 1) {
+            Node newNode = new Node(1);
+            newNode.next = head;
+            head = newNode;
+        }
+
+        return head;
+    }
+}
+
+
+
+# Q.14
+
+2. Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+Example 1:
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807.
+# Solution.d
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode t1=l1;
+        ListNode t2=l2;
+       ListNode dummyNode=new ListNode(-1);
+        int carry=0;
+        int sum=0;
+        ListNode curr=dummyNode;
+
+        while(t1!=null || t2!=null){
+      
+               if(t1!=null) sum=sum+t1.val;
+            if(t2!=null) sum=t2.val+sum;
+            ListNode newNode=new ListNode(sum%10);
+            curr.next=newNode;
+            curr=newNode;
+           sum=sum/10;
+            if(t1!=null) t1=t1.next;
+            if(t2!=null) t2=t2.next;
+
+        }
+        if(sum==1){
+            ListNode newNode=new ListNode(1);
+            curr.next=newNode;
+            curr=newNode;
+        }
+        return dummyNode.next;
+
+    }
+
+
+
+# Q.15
+You are given the head_ref of a doubly Linked List and a Key. Your task is to delete all occurrences of the given key if it is present and return the new DLL.
+
+Example1:
+
+Input: 
+2<->2<->10<->8<->4<->2<->5<->2
+2
+
+ static Node deleteAllOccurOfX(Node head, int x) {
+        Node temp=head;
+        Node front=null;
+        Node prev=null;
+      
+        while(temp!=null){
+        front=temp.next;
+        if(temp.data==x){
+            
+        
+        if(temp==head){
+            head=head.next;
+        }
+       
+        prev=temp.prev;
+        if(front!=null){
+            front.prev=prev;
+        }
+        if(prev!=null){
+            prev.next=front;
+        }
+        temp=front;
+    
+        }else{
+            temp=temp.next;
+        }
+        }
+        return head;
+
+    }
+
+
+# Q.16
+Find pairs with given sum in doubly linked list
+Difficulty: EasyAccuracy: 66.01%Submissions: 50K+Points: 2
+Given a sorted doubly linked list of positive distinct elements, the task is to find pairs in a doubly-linked list whose sum is equal to given value target.
+Example 1:
+Input:  
+1 <-> 2 <-> 4 <-> 5 <-> 6 <-> 8 <-> 9
+target = 7
+  public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+        // code here
+         ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+      Node temp=head;
+     while(temp!=null){
+      
+         Node move=temp.next;
+         while(move!=null){
+             if(temp.data+move.data==target){
+                 ArrayList<Integer> l = new ArrayList<>();
+                 l.add(temp.data);
+                 l.add(move.data);
+                  list.add(l);
+             }
+             move=move.next;
+         }
+         temp=temp.next;
+        
+     }
+        
+        return list;
+    }
+
+
+# Q.17
+
+Remove duplicates from a sorted doubly linked list
+Difficulty: EasyAccuracy: 50.36%Submissions: 31K+Points: 2
+Given a doubly linked list of n nodes sorted by values, the task is to remove duplicate nodes present in the linked list.
+
+Example 1:
+
+Input:
+n = 6
+1<->1<->1<->2<->3<->4
+Output:
+1<->2<->3<->4
+
+    Node removeDuplicates(Node head){
+        // Code Here.
+        Node nextnode=null;
+        Node temp=head;
+        Node prev=null;
+        while(temp!=null && temp.next!=null){
+            nextnode=temp.next;
+            while(nextnode!=null && nextnode.data==temp.data){
+                nextnode=nextnode.next;
+            }
+           temp.next=nextnode;
+           if(nextnode!=null){
+               nextnode.prev=temp;
+           }
+         temp=temp.next;
+         
+        }
+        return head;
+
+
+# 18 Reverse LinkedList.
+import java.io.*;
+import java.util.* ;
+
+/*
+	Following is the structure of the Singly Linked List.	
+	class LinkedListNode<T> 
+    {
+    	T data;
+    	LinkedListNode<T> next;
+    	public LinkedListNode(T data) 
+        {
+        	this.data = data;
+    	}
+	}
+
+*/
+public class Solution 
+{
+    public static LinkedListNode<Integer> reverseLinkedList(LinkedListNode<Integer> head) 
+    {
+        // Write your code here!
+		LinkedListNode prev=null;
+
+		LinkedListNode temp=head;
+		LinkedListNode front=null;
+		while(temp!=null){
+			front=temp.next;
+			temp.next=prev;
+			prev=temp;
+			temp=front;
+		}
+		return prev;
+
+    }
+}
+
+
+# 19
+Problem statement
+You are given a Singly Linked List of integers and a reference to the node to be deleted. Every node of the Linked List has a unique value written on it. Your task is to delete that node from the linked list.
+
+A singly linked list is a linear data structure in which we can traverse only in one direction i.e. from Head to Tail. It consists of several nodes where each node contains some data and a reference to the next node.
+
+Note:
+
+• The reference to the head of the linked list is not given.
+• The node to be deleted is not a tail node.
+• The value of each node in the Linked List is unique.
+• It is guaranteed that the node to be deleted is present in the linked list.
+
+public static void deleteNode(LinkedListNode<Integer> node) {
+		// Write your code here.
+        node.data=node.next.data;
+        node.next=node.next.next;
+}
+
+
+# 20  Detect a loop.
+ if(head==null){
+            return true;
+        }
+       Node curr=head;
+       Node temp=head.next;
+       while(temp!=null && temp!=head){
+           curr.next=null;
+           curr=temp;
+           temp=temp.next;
+       }
+       if(temp==null) return false;
+       return true;
+    }
+
+# 21  25. Reverse Nodes in k-Group
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverse(ListNode head,int k){
+        ListNode prev=null;
+        ListNode curr=head;
+        ListNode nextnode=null;
+        int cnt=0;
+        while(curr!=null && cnt<k){
+            nextnode=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=nextnode;
+       cnt++;
+        }
+        return prev;
+
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head==null){
+            return head;
+        }
+        int count=0;
+        ListNode start=head;
+        ListNode temp=head;
+     
+        while(temp!=null){
+         temp = temp.next;
+            count++;
+           if (count == k) {
+         
+            ListNode reversedHead = reverse(head, k);
+
+           
+            head.next = reverseKGroup(temp, k);
+
+           
+            return reversedHead;
+        }
+
+        }
+        return head;
+        
+    }
+}
+
+
+# 22 Rotate List
+61. Rotate List
+Given the head of a linked list, rotate the list to the right by k places.
+Example 1:
+Input: head = [1,2,3,4,5], k = 2
+Output: [4,5,1,2,3]
+Example 2:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode findNth(ListNode temp,int k){
+        int cnt=1;
+        while(temp!=null){
+            if(cnt==k) return temp;
+            cnt++;
+            temp=temp.next;
+        }
+        return temp;
+    }
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null || k==0) return head;
+        ListNode tail=head;
+        int len=1;
+        while(tail.next!=null){
+            tail=tail.next;
+            len++;
+        }
+        if(k%len==0)return head;
+        k=k%len;
+        tail.next=head;
+        ListNode newNode=findNth(head,len-k);
+        head=newNode.next;
+        newNode.next=null;    
+        return head;  
+    }
+}
+

@@ -38,3 +38,21 @@ fast increase by two.
 
 # Put data in hashmap.
 mpp.put({temp,1});
+
+
+# Strings
+# codPointAt(0).
+Str.codePointAt(0) Return the Unicode of the first character in a string (the Unicode value of "H" is 72):
+
+# Java String codePointBefore() Method
+Definition and Usage
+The codePointBefore() method returns the Unicode value of the character before the specified index in a string.
+
+The index of the first character is 1, the second character is 2, and so on.
+
+Note: The value 0 will generate an error, as this is a negative number (out of reach).
+
+# Delete Node in a linkedlist
+after delete the node in c++ make sure free of the node otherwise still in the memory.
+
+In java the garbage collection take place and deleted 
