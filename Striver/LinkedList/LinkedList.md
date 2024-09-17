@@ -876,8 +876,7 @@ Input:
     }
 
 
-# Q.16
-Find pairs with given sum in doubly linked list
+# Q.16 Find pairs with given sum in doubly linked list
 Difficulty: EasyAccuracy: 66.01%Submissions: 50K+Points: 2
 Given a sorted doubly linked list of positive distinct elements, the task is to find pairs in a doubly-linked list whose sum is equal to given value target.
 Example 1:
@@ -908,9 +907,7 @@ target = 7
     }
 
 
-# Q.17
-
-Remove duplicates from a sorted doubly linked list
+# Q.17 Remove duplicates from a sorted doubly linked list
 Difficulty: EasyAccuracy: 50.36%Submissions: 31K+Points: 2
 Given a doubly linked list of n nodes sorted by values, the task is to remove duplicate nodes present in the linked list.
 
@@ -1116,3 +1113,403 @@ class Solution {
     }
 }
 
+
+# 23  Remove loop in Linked List
+Difficulty: MediumAccuracy: 27.66%Submissions: 463K+Points: 4
+Given the head of a linked list that may contain a loop.  A loop means that the last node of the linked list is connected back to a node in the same list.  So if the next of the previous node is null. then there is no loop.  Remove the loop from the linked list, if it is present (we mainly need to make the next of the last node null). Otherwise, keep the linked list as it is.
+
+Note: Given an integer, pos (1 based index)  Position of the node to which the last node links back if there is a loop. If the linked list does not have any loop, then pos = 0.
+
+The generated output will be true if your submitted code is correct, otherwise, false.
+Examples:
+Input: Linked list: 1->3->4, pos = 2
+Output: true
+Explanation: The linked list looks like
+   // Function to remove a loop in the linked list.
+    public static void removeLoop(Node head) {
+        // code here
+      Node slow=head;
+      Node fast=head;
+      while(fast!=null && fast.next!=null){
+          slow=slow.next;
+          fast=fast.next.next;
+          if(slow==fast) break;
+      }
+       if (slow != fast) return;
+
+       
+        slow=head;
+        if (slow==fast) {
+            while (fast.next != slow) {
+                fast = fast.next;
+            }
+            fast.next = null;
+            return;
+        }
+   
+        while (slow.next != fast.next) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        // Break the loop
+        fast.next = null;
+    }
+
+# 24 Kth from End of Linked List
+Difficulty: EasyAccuracy: 41.18%Submissions: 390K+Points: 2
+Given the head of a linked list and the number k, Your task is to find the kth node from the end. If k is more than the number of nodes, then the output should be -1.
+Input: LinkedList: 1->2->3->4->5->6->7->8->9, k = 2
+Output: 8
+ public:
+    int getKthFromLast(Node *head, int k) {
+        // Your code here
+        Node* temp=head;
+        int len=1;
+        while(temp!=NULL){
+            temp=temp->next;
+            len++;
+        }
+        if(len<=k) return -1;
+       len= len-k;
+       
+       int cnt=1;
+   
+       temp=head;
+       while(cnt<len){
+           temp=temp->next;
+           cnt++;
+       }
+       return temp->data;
+    }
+
+
+
+# 25 
+
+Flattening a Linked List
+Difficulty: MediumAccuracy: 51.53%Submissions: 157K+Points: 4
+Given a Linked List, where every node represents a sub-linked-list and contains two pointers:
+(i) a next pointer to the next node,
+(ii) a bottom pointer to a linked list where this node is head.
+Each of the sub-linked lists is in sorted order.
+Flatten the Link List so all the nodes appear in a single level while maintaining the sorted order.
+
+Note: The flattened list will be printed using the bottom pointer instead of the next pointer. Look at the printList() function in the driver code for more clarity.
+
+Examples:
+
+Input:
+
+Output:  5-> 7-> 8- > 10 -> 19-> 20-> 22-> 28-> 30-> 35-> 40-> 45-> 50.
+Explanation: The resultant linked lists has every node in a single level.(Note: | represents the bottom pointer.
+)
+   public static Node merge(Node list1, Node list2) {
+        // Create a dummy node as a
+        // placeholder for the result
+        Node dummyNode = new Node(-1);
+        Node res = dummyNode;
+
+        // Merge the lists based on data values
+        while (list1 != null && list2 != null) {
+            if (list1.data < list2.data) {
+                res.child = list1;
+                res = list1;
+                list1 = list1.child;
+            } else {
+                res.child = list2;
+                res = list2;
+                list2 = list2.child;
+            }
+            res.next = null;
+        }
+
+        // Connect the remaining
+        // elements if any
+        if (list1 != null) {
+            res.child = list1;
+        } else {
+            res.child = list2;
+        }
+
+        // Break the last node's
+        // link to prevent cycles
+        if (dummyNode.child != null) {
+            dummyNode.child.next = null;
+        }
+
+        return dummyNode.child;
+    
+   }
+
+# 25  138. Copy List with Random Pointer
+
+A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.
+Construct a deep copy of the list. The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
+For example, if there are two nodes X and Y in the original list, where X.random --> Y, then for the corresponding two nodes x and y in the copied list, x.random --> y.
+Return the head of the copied linked list.
+The linked list is represented in the input/output as a list of n nodes. Each node is represented as a pair of [val, random_index] where:
+val: an integer representing Node.val
+random_index: the index of the node (range from 0 to n-1) that the random pointer points to, or null if it does not point to any node.
+Your code will only be given the head of the original linked list.
+Example 1:
+Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+class Solution {
+    public Node deepcopy(Node head){
+        Node dummynode=new Node(-1);
+        Node temp=head;
+        Node res=dummynode;
+        while(temp!=null){
+           res.next=temp.next;
+           temp.next=temp.next.next;
+           res=res.next;
+           temp=temp.next;
+
+        }
+        return dummynode.next;
+    }
+  public void randomPointer(Node head){
+    Node temp=head;
+    while(temp!=null){
+       Node copyNode=temp.next;
+       if(temp.random!=null){
+           copyNode.random=temp.random.next;
+       }else{
+        copyNode.random=null;
+       }   
+      temp=temp.next.next;     
+    }
+  }
+  public void insertBetween(Node head){
+    Node temp=head;
+        while(temp!=null){
+           Node copyNode=new Node(temp.val);
+           copyNode.next=temp.next;
+           temp.next=copyNode;
+           temp=temp.next.next;
+
+        }
+  }
+    public Node copyRandomList(Node head) {
+        if(head==null)return head;
+        insertBetween(head);
+        randomPointer(head);
+        return deepcopy(head);     
+    }
+}
+
+
+
+# 26 Remove duplicates from a sorted Doubly Linked List
+
+A doubly-linked list is a data structure that consists of sequentially linked nodes, and the nodes have reference to both the previous and the next nodes in the sequence of nodes.
+You are given a sorted doubly linked list of size 'n'.
+Remove all the duplicate nodes present in the linked list.
+Example :
+Input: Linked List: 1 <-> 2 <-> 2 <-> 2 <-> 3
+Output: Modified Linked List: 1 <-> 2 <-> 3
+Explanation: We will delete the duplicate values ‘2’ present in the linked list.
+Detailed explanation ( Input/output format, Notes, Images )
+Sample Input 1 :
+5
+1 2 2 2 3
+Sample Output 1 :
+1 2 3
+Explanation For Sample Input 1 :
+We will delete the duplicate values ‘2’ present in the linked list.
+public class Solution {
+    public static Node uniqueSortedList(Node head) {
+        // Write your code here.
+       if(head==null || head.next==null)return head;
+       Node curr=head;
+       while(curr!=null){
+           Node next=curr.next;
+           while(next!=null && next.data==curr.data){
+               next=next.next;
+           }
+           curr.next=next;
+           curr=curr.next;
+       }
+       return head;
+    }
+
+}
+
+# 27  92. Reverse Linked List II
+Solved
+Medium
+Topics
+Companies
+Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,4,5], left = 2, right = 4
+Output: [1,4,3,2,5]
+Example 2:
+
+Input: head = [5], left = 1, right = 1
+Output: [5]
+class Solution {
+    public ListNode reverse(ListNode lefthead,int end){
+        ListNode next;
+        ListNode curr = lefthead;
+        ListNode prev = null;
+        int start = 0;
+
+        while (curr != null && start <= end) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            start++;
+        }
+    after reverse connect again our linkedlist.
+        lefthead.next = curr; 
+        return prev;
+       
+    }
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head==null || head.next==null)return head;
+      
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        prev.next=head;
+
+     
+        for (int i = 1; i < left; i++) {
+            prev = prev.next;
+        }
+
+      
+        ListNode lefthead = prev.next;
+        ListNode reverseHead = reverse(lefthead, right - left);
+
+       
+        prev.next = reverseHead;
+
+        return dummy.next;
+        
+    }
+}
+
+
+# 28 143. Reorder List
+You are given the head of a singly linked-list. The list can be represented as:
+L0 → L1 → … → Ln - 1 → Ln
+Reorder the list to be on the following form:
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+Example 1:
+Input: head = [1,2,3,4]
+Output: [1,4,2,3]
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode prev=null;
+        ListNode curr=head;
+        ListNode next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+       
+    }
+    public void reorderList(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        ListNode mid=slow.next;
+        slow.next=null;
+       mid=reverse(mid);
+       while(mid!=null){
+        ListNode node1=head.next;
+        ListNode node2=mid.next;
+        head.next=mid;
+        mid.next=node1;
+        head=node1;
+        mid=node2;
+       }
+
+     
+        
+    }
+}
+
+# 29  3217. Delete Nodes From Linked List Present in Array
+
+You are given an array of integers nums and the head of a linked list. Return the head of the modified linked list after removing all nodes from the linked list that have a value that exists in nums.
+Example 1:
+Input: nums = [1,2,3], head = [1,2,3,4,5]
+Output: [4,5]
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+        map<int,int>mpp;
+        ListNode* curr=head;
+        ListNode* dummy=new ListNode(-1);
+        ListNode* prev=dummy;
+        for(int i=0;i<nums.size();i++){
+            mpp[nums[i]]++;
+        }
+        while(curr!=NULL){
+            if(mpp.find(curr->val) != mpp.end()){
+     
+        curr = curr->next;
+    } else {
+        prev->next = curr;
+        prev = prev->next;
+        curr = curr->next;
+    }
+
+        }
+        prev->next=NULL;
+        return dummy->next;
+        
+    }
+};

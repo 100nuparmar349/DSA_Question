@@ -139,8 +139,6 @@ public int removelast(){
     tail=prev;
    size--;
     return val;
-
-
 }
 public int search(int target){
     Node temp=head;

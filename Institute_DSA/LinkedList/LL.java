@@ -21,6 +21,20 @@ public class LL {
     newNode.next = head;
     head = newNode;
 }
+public void addLast(int data) {
+    Node newNode = new Node(data);
+    Node temp=head;
+    if(head==null){
+        head=newNode;
+        return;
+    }
+    while(temp.next!=null){
+        temp=temp.next;
+    }
+    temp.next=newNode;
+    temp=newNode;
+    
+}
 public void removeFirst(){
     if(head==null){
         return;
@@ -30,6 +44,37 @@ public void removeFirst(){
     head=head.next;
     temp.next=null;
 
+}
+
+
+public void removelast(){
+    Node temp=head;
+    int cnt=0;
+    // if(head==null){
+    //     System.out.println("Linked List is empty");
+    //     return;
+
+    // }
+    // if(head.next!=null){
+    //     head=null;
+    //     return;
+  //  }
+//   while(temp.next.next!=null){
+//     temp=temp.next;
+//   }
+//   temp.next=null;
+
+    while(temp!=null){
+        temp=temp.next;
+        cnt++;
+    }
+    temp=head;
+    for(int i=0;i<cnt-2;i++){
+        temp=temp.next;
+    }
+    System.out.println("Data");
+   // System.out.println(temp.data);
+    temp.next=null;
 }
 public void print(){
     Node temp=head;
@@ -48,9 +93,12 @@ public void print(){
         ll.addFirst(2);
         
         ll.removeFirst();
-        ll.addFirst(23);
-      
+        ll.addFirst(3);
+      ll.addLast(5);
+      System.out.println("Remove THe last");
+     ll.removelast();
         ll.print();
+        
         // System.out.println(head.data);
         
     }

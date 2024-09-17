@@ -41,6 +41,13 @@ mpp.put({temp,1});
 
 
 # Strings
+# s.isEmpty() check the string is null or not.
+
+# Trim Method
+Trim any leading or trailing spaces
+        s = s.trim();
+
+
 # codPointAt(0).
 Str.codePointAt(0) Return the Unicode of the first character in a string (the Unicode value of "H" is 72):
 
@@ -56,3 +63,24 @@ Note: The value 0 will generate an error, as this is a negative number (out of r
 after delete the node in c++ make sure free of the node otherwise still in the memory.
 
 In java the garbage collection take place and deleted 
+
+# static use because we directly access in the main method
+
+
+# String convert to number.
+int num = Integer.parseInt(String s);
+
+# Math.pow(x,n);
+Find easily square
+
+
+# In the comparison part, left.data != right.data needs to be handled carefully for reference comparison (== vs .equals()).
+
+
+# 
+The logic remains the same, but since Java’s boolean type expects an explicit comparison, we check if ((n >> k) & 1) is equal to 1.
+
+
+# Stack
+stack using arraylist.
+
