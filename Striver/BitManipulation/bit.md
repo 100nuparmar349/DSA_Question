@@ -47,3 +47,99 @@ Explanation: Binary representation of 4 is 100, in which 0th index bit from LSB 
   public boolean isPowerOfTwo(int n) {   
         return (n&(n-1))==0;
     }
+
+# 04 2220. Minimum Bit Flips to Convert Number
+
+A bit flip of a number x is choosing a bit in the binary representation of x and flipping it from either 0 to 1 or 1 to 0.
+
+For example, for x = 7, the binary representation is 111 and we may choose any bit (including any leading zeros not shown) and flip it. We can flip the first bit from the right to get 110, flip the second bit from the right to get 101, flip the fifth bit from the right (a leading zero) to get 10111, etc.
+Given two integers start and goal, return the minimum number of bit flips to convert start to goal.
+Example 1:
+Input: start = 10, goal = 7
+Output: 3
+Explanation: The binary representation of 10 and 7 are 1010 and 0111 respectively. We can convert 10 to 7 in 3 steps:
+- Flip the first bit from the right: 1010 -> 1011.
+- Flip the third bit from the right: 1011 -> 1111.
+- Flip the fourth bit from the right: 1111 -> 0111.
+It can be shown we cannot convert 10 to 7 in less than 3 steps. Hence, we return
+class Solution {
+    public int minBitFlips(int start, int goal) {
+        int ans=start^goal;
+      int cnt=0;
+      while(ans>0){
+        cnt+=ans&1;
+        ans=ans>>1;
+      }
+      return cnt;
+    }
+}
+
+# 05 78. Subsets
+Given an integer array nums of unique elements, return all possible 
+subsets
+ (the power set).
+The solution set must not contain duplicate subsets. Return the solution in any order.
+Example 1:
+Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+Example 2:
+Input: nums = [0]
+Output: [[],[0]]
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+      
+      int n = nums.size();
+	vector<vector<int>>ans;
+	for (int num = 0; num < (1 << n); num++) {
+	vector<int>temp;
+		for (int i = 0; i < n; i++) {
+			//check if the ith bit is set or not
+			if ((num & (1 << i))!=0) {
+				// sub += s.charAt(i);
+                temp.push_back(nums[i]);
+			}
+		}
+		
+			ans.push_back(temp);
+		
+	}
+        return ans;
+    }
+};
+
+#  07 Reverse Bits
+# Code
+cpp []
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t reversed = 0;
+        int bits_count = sizeof(n) * 8; // Total number of bits in uint32_t
+        for (int i = 0; i < bits_count; ++i) {
+            reversed = (reversed << 1) | (n & 1); // Shift reversed left and add the rightmost bit of n
+            n >>= 1; // Shift n to the right by 1
+        }
+        return reversed;
+    }
+};
+
+# 08 Count Bit 
+ class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int>v;
+        for(int i=0;i<=n;i++){
+            int temp=i;
+            int cnt=0;
+            while(temp!=0){
+                int bit=temp&1;
+                if(bit==1)cnt++;
+                temp=temp>>1;
+            }
+
+            v.push_back(cnt);
+        }
+        return v;
+    }
+};

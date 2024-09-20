@@ -1513,3 +1513,135 @@ public:
         
     }
 };
+
+# 30 2807. Insert Greatest Common Divisors in Linked List
+
+Given the head of a linked list head, in which each node contains an integer value.
+
+Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them.
+
+Return the linked list after insertion.
+
+The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.
+Example 1:
+Input: head = [18,6,10,3]
+Output: [18,6,6,2,10,1,3]
+
+class Solution {
+public:
+int gcd(int x,int y){
+    if(y==0)return x;
+    return gcd(y,x%y);
+}
+    ListNode* insertGreatestCommonDivisors(ListNode* head) {
+        ListNode* curr=head;
+        while(curr!=NULL && curr->next!=NULL){
+                int data=gcd(curr->val,curr->next->val);
+                ListNode* newnode=new ListNode(data);
+                newnode->next=curr->next;
+                curr->next=newnode;
+                curr=newnode->next; 
+        }
+        return head;
+        
+    }
+};
+
+# 31 2487. Remove Nodes From Linked List
+
+You are given the head of a linked list.
+
+Remove every node which has a node with a greater value anywhere to the right side of it.
+
+Return the head of the modified linked list.
+
+ 
+
+Example 1:
+
+
+Input: head = [5,2,13,3,8]
+Output: [13,8]
+Explanation: The nodes that should be removed are 5, 2 and 3.
+- Node 13 is to the right of node 5.
+- Node 13 is to the right of node 2.
+- Node 8 is to the right of node 3.
+class Solution {
+public:
+ListNode* reverse(ListNode* head){
+    ListNode* prev=NULL;
+    ListNode* curr=head;
+    ListNode* next;
+    while(curr!=nullptr){
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+    }
+    return prev;
+
+
+}
+    ListNode* removeNodes(ListNode* head) {
+        head=reverse(head);
+       ListNode* newhead=new ListNode();
+       ListNode* temp=newhead;
+       int maxval=INT_MIN;
+       while(head){
+        if(head->val>=maxval){
+            maxval=max(maxval,head->val);
+            ListNode* newNode=new ListNode(maxval);
+            temp->next=newNode;
+            temp=temp->next;
+        }
+        head=head->next;
+       }
+    return reverse(newhead->next);
+
+      
+    }
+};
+
+# 32 1721. Swapping Nodes in a Linked List
+You are given the head of a linked list, and an integer k.
+Return the head of the linked list after swapping the values of the kth node from the beginning and the kth node from the end (the list is 1-indexed).
+Example 1:
+Input: head = [1,2,3,4,5], k = 2
+Output: [1,4,3,2,5]
+
+class Solution {
+    public int lengths(ListNode head){
+        int len=0;
+        ListNode temp=head;
+        while(temp!=null){
+            temp=temp.next;
+            len++;
+        }
+        return len;
+    }
+    public ListNode swapNodes(ListNode head, int k) {
+        int len=lengths(head);
+          int size = len - k + 1; 
+    
+        ListNode left=null,last=null,temp=head;
+        int cnt=1;
+        while(temp!=null ){
+             if (cnt == k) {
+                left = temp;  // The k-th node from the start
+            }
+            if (cnt == size) {
+                last = temp;  // The k-th node from the end
+            }
+            cnt++;
+            temp = temp.next; 
+        }
+          if (left != null && last != null) {
+            int t = left.val;
+            left.val = last.val;
+            last.val = t;
+        }
+        
+        return head;
+        
+    }
+}
