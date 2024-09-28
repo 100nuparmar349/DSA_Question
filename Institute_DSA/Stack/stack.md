@@ -9,7 +9,7 @@ MinStack() initializes the stack object.
 void push(int val) pushes the element val onto the stack.
 void pop() removes the element on the top of the stack.
 int top() gets the top element of the stack.
-int getMin() retrieves the minimum element in the stack.
+int getMin() retrieves++ the minimum element in the stack.
 You must implement a solution with O(1) time complexity for each function.
 
 
@@ -200,3 +200,33 @@ Every close bracket has a corresponding open bracket of the same type.
         return st.isEmpty();
     }
 }
+
+
+-- DDl (data definition language)
+CREATE DATABASE DDL;
+USE DDL;
+CREATE TABLE DDL_TABLE(
+Id int,
+Name varchar(20),
+Age int
+);
+select * from DDL_TABLE;
+select Name from DDL_TABLE;
+select Age from DDL_TABLE;
+
+select * from DDL_TABLE;
+insert into DDL_TABLE
+values(1,'sonu',20),
+(2,'Govind',19);
+
+select * from DDL_TABLE;
+alter table DDL_TABLE
+modify column name varchar(50),
+
+add column email varchar(50);
+
+insert into DDL_TABLE
+values(10,'parmar',20,'sonu757575');
+
+alter table DDL_TABLE;
+drop column email

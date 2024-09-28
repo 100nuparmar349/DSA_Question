@@ -1,13 +1,8 @@
 # 01 Bit Manipulation
-Difficulty: EasyAccuracy: 49.84%Submissions: 37K+Points: 2
 Given a 32 bit unsigned integer num and an integer i. Perform following operations on the number - 
-
 1. Get ith bit
-
 2. Set ith bit
-
 3. Clear ith bit
-
 Note : For better understanding, we are starting bits from 1 instead 0. (1-based). You have to print space three space seperated values ( as shown in output ) and do not have to return anything.
 
 Examples :
@@ -143,3 +138,84 @@ public:
         return v;
     }
 };
+
+
+
+# 09 Count Prime
+N=10.
+class Solution {
+public:
+    
+    int countPrimes(int n) {
+        int cnt=0;
+        int prime[n+1];
+        for(int i=1;i<n;i++){
+            prime[i]=1;
+        }
+        for(int i=2;i<sqrt(n);i++){
+            if(prime[i]==1){
+                for(int j=i*i;j<=n;j+=i){
+                    prime[j]=0;
+                }
+            }
+        }
+        for(int i=2;i<n;i++){
+            if(prime[i]==1)cnt++;
+        }
+        return cnt;
+       
+    }
+};
+
+# 10 All divisors of a Number
+Given an integer N, print all the divisors of N in the ascending order.
+Example 1:
+Input : 20
+Output: 1 2 4 5 10 20
+Explanation: 20 is completely 
+ public:
+    void print_divisors(int n) {
+        // Code here.
+        vector<int>v;
+        for(int i=1;i<=sqrt(n);i++){
+            if(n%i==0){
+                v.push_back(i);
+                if(n!=1 && i!=n/i){
+                     v.push_back(n/i);
+                }
+               
+            }
+        }
+        sort(v.begin(),v.end());
+        for(int i=0;i<v.size();i++){
+            cout<<v[i]<<" ";
+        }
+    }
+
+# 204. Count Primes
+
+Given an integer n, return the number of prime numbers that are strictly less than n.
+Example 1:
+Input: n = 10
+Output: 4
+Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+
+ int countPrimes(int n) {
+        int cnt=0;
+        int prime[n+1];
+        for(int i=1;i<n;i++){
+            prime[i]=1;
+        }
+        for(int i=2;i<sqrt(n);i++){
+            if(prime[i]==1){
+                for(int j=i*i;j<=n;j+=i){
+                    prime[j]=0;
+                }
+            }
+        }
+        for(int i=2;i<n;i++){
+            if(prime[i]==1)cnt++;
+        }
+        return cnt;
+       
+    }

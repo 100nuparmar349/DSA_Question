@@ -84,5 +84,95 @@ The logic remains the same, but since Java’s boolean type expects an explicit 
 # Stack
 stack using arraylist.
 
+offer() and poll() Methods: offer() is used to add elements to the queue, and poll() is used to remove and return the front element.
+
 # 
+
+CREATE DATABASE COLLEGES;
+USE collges;
+
+CREATE TABLE COLLEGES (
+    Id int,
+    Name varchar(20),
+    Address varchar(50),
+    Age int
+);
+select * from COLLEGES;
+select Name from COLLEGES;
+select Address from COLLEGES;
+INSERT INTO COLLEGES(Id,Name,Address,Age)
+VALUES(1,'SONU','DORABAD',4);
+SELECT Name,Address FROM COLLEGES;
+
+
+-- Add a new column 'Gmail'
+ALTER TABLE COLLEGES
+ADD COLUMN Gmail VARCHAR(50);
+
+-- Check if the new column is added
+DESCRIBE COLLEGES;
+
+-- Select the new column along with existing data
+SELECT Name, Address, Gmail FROM COLLEGES;
+
+
+--  DML
+UPDATE CLASS1
+SET ADDRESS ='INDORE'
+where id=1;
+sql_set_safe_updates=0;
+
+
+
+# Recursion
+those problem to convert non polynomial to polynomial.
+
+Recursion is an algorithm in which a method is called directly or indirectly again and again until a certain condition is meet
+This condition is known as base case. 
+
+Direct call to itself and indirect call to another function.
+
+
+There are three types of recursion.
+ the first statement of every recursion code is the base condition
+# Head Recursion
+ M()
+ BC
+ M() // Recursive case
+
+# Tail Recursion
+M(){
+    BC 
+    print()
+    M() // Recursive Code.
+}
+
+#  Tree Recursion
+
+When  there are two or more recursive case are  called recursive case.
+
+
+
+Point 
+Recursion uses stack memory to store it's recursive case(LIFO)
+
+# Iteration
+1. No extra space
+2. Faster than linear Recursion but slower than tree
+3. More line of code 
+
+
+# Rcursion
+1. stack space 
+2. vice versa 
+3. less line of code.
+
+
+
+It is used to represent all the states of recursion  from the initale state to the base case
+
+
+
+
+
 

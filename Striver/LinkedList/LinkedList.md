@@ -1645,3 +1645,238 @@ class Solution {
         
     }
 }
+
+# 33 
+1669. Merge In Between Linked Lists
+Solved
+Medium
+Topics
+Companies
+Hint
+You are given two linked lists: list1 and list2 of sizes n and m respectively.
+
+Remove list1's nodes from the ath node to the bth node, and put list2 in their place.
+
+The blue edges and nodes in the following figure indicate the result:
+
+
+Build the result list and return its head.
+
+ 
+
+Example 1:
+
+
+Input: list1 = [10,1,13,6,9,5], a = 3, b = 4, list2 = [1000000,1000001,1000002]
+Output: [10,1,13,1000000,1000001,1000002,5]
+Explanation: We remove the nodes 3 and 4 and put the entire list2 in their place. The blue edges and nodes in the above figure indicate the result.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+      ListNode a1=list1;
+      ListNode b1=list1;
+      ListNode temp=list2;
+      for(int i=1;i<a;i++){
+            a1=a1.next;
+      }
+
+       for(int i=0;i<b;i++){
+            b1=b1.next;
+      }
+      a1.next=list2;
+      while(a1.next!=null){
+        a1=a1.next;
+      }
+      a1.next=b1.next;
+      return list1;
+     
+
+    }
+
+}
+
+
+# 34 23. Merge k Sorted Lists
+
+You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+Merge all the linked-lists into one sorted linked-list and return it.
+Example 1:
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+merging them into one sorted list:
+1->1->2->3->4->4->5->6
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        vector<int>v;
+        for(int i=0;i<lists.size();i++){
+            ListNode* temp=lists[i];
+            while(temp!=nullptr){
+                v.push_back(temp->val);
+                temp=temp->next;
+            }
+
+        }
+        // sort the vector
+        sort(v.begin(),v.end());
+
+        // check the vector is empty or not
+        if (v.empty()) return nullptr;
+        ListNode* head=new ListNode(v[0]);
+        ListNode*  temp=head;
+        for(int i=1;i<v.size();i++){
+          ListNode* newNode=new ListNode(v[i]);
+          temp->next=newNode;
+          temp=newNode;
+        }
+        return head;
+
+
+    }
+};
+
+
+# 35 Implement Queue using Linked List
+Difficulty: BasicAccuracy: 45.6%Submissions: 121K+Points: 1
+Implement a Queue using Linked List. 
+A Query Q is of 2 Types
+(i) 1 x   (a query of this type means  pushing 'x' into the queue)
+(ii) 2     (a query of this type means to pop an element from the queue and print the poped element)
+
+Example 1:
+
+Input:
+Q = 5
+Queries = 1 2 1 3 2 1 4 2
+Output: 2 3
+Explanation: n the first testcase
+1 2 the queue will be {2}
+1 3 the queue will be {2 3}
+2   poped element will be 2 the
+    queue will be {3}
+1 4 the queue will be {3 4}
+2   poped element will be 3.
+class MyQueue
+{
+    QueueNode front, rear;
+    
+    //Function to push an element into the queue.
+	void push(int a)
+	{
+        // Your code here
+        QueueNode newNode=new QueueNode(a);
+        if(rear==null || front==null){
+            front=newNode;
+            rear=newNode;
+        }else{
+            rear.next=newNode;
+            rear=newNode;
+        }
+       
+	}
+	
+    //Function to pop front element from the queue.
+	int pop()
+	{
+        // Your code here
+        if(front==null)return -1;
+        
+        int n=front.data;
+        front=front.next;
+       
+        return n;
+	}
+}
+
+
+# 36 705. Design HashSet
+Design a HashSet without using any built-in hash table libraries.
+Implement MyHashSet class:
+void add(key) Inserts the value key into the HashSet.
+bool contains(key) Returns whether the value key exists in the HashSet or not.
+void remove(key) Removes the value key in the HashSet. If key does not exist in the HashSet, do nothing.
+Example 1:
+Input
+["MyHashSet", "add", "add", "contains", "contains", "add", "contains", "remove", "contains"]
+[[], [1], [2], [1], [3], [2], [2], [2], [2]]
+Output
+[null, null, null, true, false, null, true, null, false]
+class MyHashSet {
+
+    private  boolean[] set;
+
+    public MyHashSet() {
+        set=new boolean[10000001];
+    }
+    
+    public void add(int key) {
+        set[key]=true;
+    }
+    
+    public void remove(int key) {
+        set[key]=false;
+    }
+    
+    public boolean contains(int key) {
+      return  set[key];
+    }
+}
+
+
+
+
+# 37 147. Insertion Sort List
+
+Given the head of a singly linked list, sort the list using insertion sort, and return the sorted list's head.
+
+The steps of the insertion sort algorithm:
+
+Insertion sort iterates, consuming one input element each repetition and growing a sorted output list.
+At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list and inserts it there.
+It repeats until no input elements remain.
+The following is a graphical example of the insertion sort algorithm. The partially sorted list (black) initially contains only the first element in the list. One element (red) is removed from the input data and inserted in-place into the sorted list with each iteration.
+Example 1:
+Input: head = [4,2,1,3]
+Output: [1,2,3,4]
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null) return head;
+
+        ListNode sorted = new ListNode(0); // dummy node
+        ListNode current = head;
+
+        while (current != null) {
+            ListNode prev = sorted;
+            ListNode next = sorted.next;
+            while (next != null && next.val < current.val) {
+                prev = next;
+                next = next.next;
+            }
+            ListNode temp = current.next;
+            current.next = next;
+            prev.next = current;
+            
+          
+            current = temp;
+        }
+
+        return sorted.next;
+    }
+}
+
