@@ -120,3 +120,48 @@ pop()    : poped element will be 4
             }
         }
         return st.top();
+
+
+
+# Postfix to infix
+
+   string postToInfix(string exp) {
+     int n = exp.length();
+        stack<string> st;
+        for(int i=0;i<n;i++){
+            char ch = exp[i];
+            if((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9')){
+                st.push(string(1,ch));
+            }
+            else{
+                string s2=st.top();
+                st.pop();
+                string s1=st.top();
+                st.pop();
+                st.push('(' + s1 + ch + s2 + ')');
+            }
+        }
+        return st.top();
+    }
+
+# Postfix to prefix
+ string postToPre(string s) {
+        // Write your code here
+        stack<string>st;
+        int i=0;
+        int n=s.length();
+        while(i<n){
+            if(isalnum(s[i])){
+                st.push(string(1,s[i]));
+            }else{
+                string t1=st.top();
+                st.pop();
+                string t2=st.top();
+                st.pop();
+                st.push(s[i]+t2+t1);
+            }
+            i++;
+        }
+        return st.top();
+        
+    }
