@@ -78,7 +78,7 @@ Example 2:
 
 Input: asteroids = [8,-8]
 Output: []
-Explanation: The 8 and -8 collide exploding each other.
+Explanation: The 8 and -8 cfollide exploding each other.
 Example 3:
 
 Input: asteroids = [10,2,-5]

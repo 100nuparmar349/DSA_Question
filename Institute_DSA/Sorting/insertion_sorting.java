@@ -22,6 +22,7 @@ public class insertion_sorting {
             }
             arr[j+1]=x;
         }
+        System.out.println("After Sorting");
         for(int i=0;i<n;i++){
             System.out.print(arr[i]+" ");
         }
