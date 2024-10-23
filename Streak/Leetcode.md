@@ -483,3 +483,38 @@ public:
         return count;
     }
 };
+
+# 13  2583. Kth Largest Sum in a Binary Tree
+
+You are given the root of a binary tree and a positive integer k.
+
+The level sum in the tree is the sum of the values of the nodes that are on the same level.
+
+Return the kth largest level sum in the tree (not necessarily distinct). If there are fewer than k levels in the tree, return -1.
+
+Note that two nodes are on the same level if they have the same distance from the root.
+Example 1:
+Input: root = [5,8,9,2,1,3,7,4,6], k = 2
+Output: 13
+class Solution {
+   
+    public long kthLargestLevelSum(TreeNode root, int k) {
+        List<Long>ans=new ArrayList<>();
+        Queue<TreeNode>q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size=q.size();
+            long  sum=0;
+            for(int i=0;i<size;i++){
+                TreeNode node=q.poll();
+                sum+=node.val;
+                if(node.left!=null)q.add(node.left);
+                if(node.right!=null)q.add(node.right);
+            }
+            ans.add(sum);
+        }
+        if(k>ans.size())return -1;
+    ans.sort(Collections.reverseOrder());
+       return ans.get(k-1);
+    }
+}
