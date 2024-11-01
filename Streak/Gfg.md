@@ -204,3 +204,147 @@ Explanation: The sum of the last three nodes in the linked list is 3 + 4 + 10 = 
         return sum;
     
     }
+
+
+
+#  10
+Quick Sort on Linked List
+Difficulty: MediumAccuracy: 71.8%Submissions: 20K+Points: 4
+You are given a Linked List. Sort the given Linked List using quicksort. 
+
+Examples:
+
+Input: Linked list: 1->6->2
+Output: 1->2->6
+
+Explanation:
+After sorting the nodes, we have 1, 2 and 6.
+
+class solution{
+    
+    public:
+    
+    int partitionindexofarr(vector<int>&arr,int l,int h){
+        
+        int pivotindex=arr[l];
+        
+        int i=l;
+        int j=h;
+        
+        while(i<j){
+      
+            while(arr[i]<=pivotindex && i<h){
+                i++;
+            }
+            
+            while(arr[j]>=pivotindex && j>l){
+                j--;
+            }
+            
+            
+            if(i<j){
+                swap(arr[i],arr[j]);
+            }
+            
+        }
+        
+        swap(arr[j],arr[l]);
+        
+        return j;
+    }
+    
+    
+    void quicksorting(vector<int>&arr,int l,int h){
+        
+     if(l>=h){
+         return;
+     }
+        
+       int partitionindex=partitionindexofarr(arr,l,h);
+        
+       quicksorting(arr,l, partitionindex-1);
+       
+       quicksorting(arr,partitionindex+1,h);
+        
+    }
+    
+    vector<int>quicksort(vector<int>&arr){
+        
+        int n=arr.size();
+        quicksorting(arr,0,n-1);
+        return arr;
+    }
+};
+
+class Solution {
+  public:
+   Node* quickSort( Node* head) {
+       
+       
+       solution s;
+       
+       
+       vector<int>arr;
+       
+       Node* temp=head;
+       
+       while(temp!=nullptr){
+           
+           arr.push_back(temp->data);
+           
+           temp=temp->next;
+       }
+       
+       vector<int>ans=s.quicksort(arr);
+       
+       Node* newhead=nullptr;
+       
+       Node* curr=nullptr;
+       Node* prev=nullptr;
+       
+    for(int i=0;i<ans.size();i++){
+        
+          curr=new Node(ans[i]);
+
+      if(newhead==nullptr){
+           
+        
+          newhead=curr;
+          prev=curr;
+      } 
+      else{
+           
+          prev->next=curr;
+          prev=curr;
+      }
+        
+    }
+    
+    return newhead;
+    }
+};
+
+
+# 11
+Pairs with difference k
+Given an array arr[] of positive integers. Find the number of pairs of integers whose difference equals a given number k.
+Note: (a, b) and (b, a) are considered the same. Also, the same numbers at different indices are considered different.
+
+Examples:
+
+Input: arr[] = [1, 5, 3, 4, 2], k = 3
+Output: 2
+Explanation: There are 2 pairs with difference 3,the pairs are {1, 4} and {5, 2} 
+   int countPairsWithDiffK(vector<int>& arr, int k) {
+       map<int,int>mpp;
+       int cnt=0;
+       for(int i=0;i<arr.size();i++){
+           mpp[arr[i]+k]++;
+       }
+       for(int i=0;i<arr.size();i++){
+           if(mpp.find(arr[i])!=mpp.end()){
+               cnt+=mpp[arr[i]];
+           }
+       }
+       return cnt;
+    }

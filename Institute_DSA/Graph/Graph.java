@@ -60,8 +60,19 @@ public class Graph{
         }
     }
     
-    public static void printAllpath(ArrayList<Edge>graph[],int curr,int v,String ans){
-        
+    public static void printAllpath(ArrayList<Edge>graph[],int s,int d,boolean[] vis,String ans){
+      
+        if(s==d){
+            System.out.println(ans);
+        }
+        for(Edge e:graph[s]){
+            if(!vis[e.dest]){
+                vis[e.dest]=true;
+                printAllpath(graph,e.dest, d, vis, ans+e.dest);
+                vis[e.dest]=false;
+            }
+        }
+
     }
     public static void main(String[] args) {
 
